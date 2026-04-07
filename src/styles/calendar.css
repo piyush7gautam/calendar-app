@@ -1,0 +1,107 @@
+.calendar-container {
+  width: 700px;
+  margin: 40px auto;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  font-family: Arial, sans-serif;
+}
+
+.calendar-header img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.calendar-body {
+  display: flex;
+  padding: 20px;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.notes {
+  width: 40%;
+}
+
+/* ✅ Make textarea fit properly */
+.notes textarea {
+  width: 100%;
+}
+
+/* ✅ FIX GRID */
+.grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+}
+
+.day {
+  padding: 12px;
+  text-align: center;
+  border-radius: 6px;
+  cursor: pointer;
+  min-height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: all 0.2s ease; /* 🔥 smooth */
+}
+.day:active {
+  transform: scale(0.9);
+}
+
+/* Hover effect */
+.day:hover {
+  background: #f0f0f0;
+}
+
+/* Selected date */
+.selected {
+  background: #007bff;
+  color: white;
+}
+
+/* Range highlight */
+.range {
+  background: #cce5ff;
+}
+
+@media (max-width: 600px) {
+  .calendar-container {
+    width: 95%;
+  }
+
+  .calendar-body {
+    flex-direction: column;
+  }
+
+ .notes {
+  width: 220px;
+}
+
+  .grid {
+    width: 100%;
+  }
+}
+
+.notes textarea {
+  width: 100%;
+  padding: 8px;
+  border-radius: 6px;
+}
+
+.notes button {
+  margin-top: 8px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.calendar-header {
+  position: relative;
+}
