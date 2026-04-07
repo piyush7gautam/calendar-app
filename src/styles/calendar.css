@@ -8,10 +8,27 @@
   font-family: Arial, sans-serif;
 }
 
+.calendar-header {
+  position: relative;
+  height: 180px;
+  overflow: hidden;
+}
+
 .calendar-header img {
   width: 100%;
-  height: 200px;
+  height: 100%;
   object-fit: cover;
+  filter: brightness(0.85);
+}
+.calendar-header::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.2),
+    rgba(0,0,0,0.6)
+  );
 }
 
 .calendar-body {
@@ -30,78 +47,126 @@
   width: 100%;
 }
 
-/* ✅ FIX GRID */
 .grid {
-  flex: 1;
+  width: 60%;
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 8px;
+  gap: 10px;
 }
 
 .day {
-  padding: 12px;
-  text-align: center;
-  border-radius: 6px;
-  cursor: pointer;
-  min-height: 40px;
-
+  min-height: 45px;
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 10px;
+  background: #f8f9fa;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
 
-  transition: all 0.2s ease; /* 🔥 smooth */
+.day:hover {
+  background: #e9ecef;
+  transform: translateY(-2px);
 }
 .day:active {
   transform: scale(0.9);
 }
 
-/* Hover effect */
-.day:hover {
-  background: #f0f0f0;
-}
 
-/* Selected date */
+
 .selected {
-  background: #007bff;
+  background: #4f46e5;
   color: white;
 }
 
-/* Range highlight */
 .range {
-  background: #cce5ff;
+  background: #c7d2fe;
 }
 
-@media (max-width: 600px) {
-  .calendar-container {
-    width: 95%;
-  }
 
+@media (max-width: 768px) {
   .calendar-body {
-    flex-direction: column;
-  }
-
- .notes {
-  width: 220px;
+  display: flex;
+  padding: 20px;
+  gap: 20px;
+  align-items: flex-start;
 }
 
-  .grid {
-    width: 100%;
-  }
+  .notes {
+  width: 40%;
+}
+
+  .calendar-container {
+  width: 480px;
+  margin: 40px auto;
+  background: #ffffff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+}
 }
 
 .notes textarea {
   width: 100%;
-  padding: 8px;
-  border-radius: 6px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  padding: 10px;
+  outline: none;
 }
 
 .notes button {
-  margin-top: 8px;
-  padding: 6px 10px;
+  margin-top: 10px;
+  padding: 6px 12px;
   border-radius: 6px;
+  border: none;
+  background: #4f46e5;
+  color: white;
   cursor: pointer;
 }
 
-.calendar-header {
-  position: relative;
+.calendar-header::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.2),
+    rgba(0,0,0,0.6)
+  );
+
+  pointer-events: none;   /* ✅ ADD THIS LINE */
+}
+
+.today {
+  border: 2px solid red;
+  font-weight: bold;
+}
+
+.nav-btn {
+  background: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.nav-btn:hover {
+  background: rgba(255,255,255,0.8);
+}
+
+.today {
+  border: 2px solid #007bff;
+  font-weight: bold;
+}
+
+.month-text {
+  position: absolute;
+  bottom: 15px;
+  left: 20px;
+  color: white;
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: 1px;
 }

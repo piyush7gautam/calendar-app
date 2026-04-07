@@ -1,37 +1,37 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
-const NotesPanel = () => {
-  const [note, setNote] = useState("");
-
-  // Load saved note
-  useEffect(() => {
-    const saved = localStorage.getItem("calendar-note");
-    if (saved) {
-      setNote(saved);
-    }
-  }, []);
-
-  // Save note
-  const handleSave = () => {
-    localStorage.setItem("calendar-note", note);
-    alert("Note saved!");
-  };
-
+const NotesPanel = ({
+  noteInput,
+  setNoteInput,
+  handleSaveNote,
+  handleDeleteNote,
+  selectedDate
+}) => {
   return (
-    <div style={{ marginTop: "20px" }}>
+    <div>
       <h3>Notes</h3>
 
+      <h4>Selected: {selectedDate || "None"}</h4>
+
       <textarea
-        rows="5"
-        cols="25"
-        value={note}
-        onChange={(e) => setNote(e.target.value)}
+        value={noteInput}
+        onChange={(e) => setNoteInput(e.target.value)}
         placeholder="Write your notes..."
+        rows={5}
+        style={{ width: "100%" }}
       />
 
-      <br />
+      <div style={{ display: "flex", gap: "10px", marginTop: "10px" }}>
+        <button onClick={handleSaveNote}>Save</button>
 
-      <button onClick={handleSave}>Save</button>
+        {/* 🔥 DELETE BUTTON */}
+        <button
+          onClick={handleDeleteNote}
+          style={{ background: "#ff4d4f", color: "white" }}
+        >
+          Delete
+        </button>
+      </div>
     </div>
   );
 };
