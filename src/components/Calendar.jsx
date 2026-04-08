@@ -10,12 +10,50 @@ const Calendar = () => {
   const [notes, setNotes] = useState({});
   const [selectedDate, setSelectedDate] = useState(null);
   const [noteInput, setNoteInput] = useState("");
+  const [shine, setShine] = useState({ x: 50, y: 50 });
+  const [shadow, setShadow] = useState({ x: 0, y: 20 });
 
-  // ✅ Current date (month navigation)
+  // ✅ Current date (month navigation) 
   const [currentDate, setCurrentDate] = useState(new Date());
+  const [tilt, setTilt] = useState({ x: 0, y: 0 });
+  const handleMouseMove = (e) => {
+  const rect = e.currentTarget.getBoundingClientRect();
+
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+
+  const centerX = rect.width / 2;
+  const centerY = rect.height / 2;
+
+  // 🎯 Tilt
+  const rotateX = (y - centerY) / 25;
+  const rotateY = (centerX - x) / 25;
+
+  setTilt({ x: rotateX, y: rotateY });
+
+  // ✨ Reflection
+  setShine({
+    x: (x / rect.width) * 100,
+    y: (y / rect.height) * 100,
+  });
+
+  // 🌑 Shadow movement
+  setShadow({
+    x: (centerX - x) / 10,
+    y: (centerY - y) / 10 + 20,
+  });
+};
+
+const handleMouseLeave = () => {
+  setTilt({ x: 0, y: 0 });
+  setShine({ x: 50, y: 50 });
+  setShadow({ x: 0, y: 20 });
+};
 
   const year = currentDate.getFullYear();
   const month = currentDate.getMonth();
+
+  
 
   // ✅ Range selection
   const [range, setRange] = useState({
@@ -141,10 +179,31 @@ useEffect(() => {
 }, [notes]);
 
   return (
-    <div className="calendar-container">
-
+  <div
+  className="calendar-container"
+  onMouseMove={handleMouseMove}
+  onMouseLeave={handleMouseLeave}
+  style={{
+    transform: `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
+    boxShadow: `
+      ${shadow.x}px ${shadow.y}px 40px rgba(0,0,0,0.25),
+      0 10px 20px rgba(0,0,0,0.1)
+    `
+  }}
+>
+<div
+    className="reflection"
+    style={{
+      background: `radial-gradient(
+        circle at ${shine.x}% ${shine.y}%,
+        rgba(255,255,255,0.2),
+        transparent 60%
+      )`
+    }}
+  ></div>
       {/* HEADER */}
       <div className="calendar-header">
+      <div className="spiral"></div>
         <img
           src="https://images.unsplash.com/photo-1501785888041-af3ef285b470"
           alt="calendar"

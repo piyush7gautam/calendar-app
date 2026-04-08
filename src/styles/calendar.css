@@ -175,3 +175,163 @@
     width: 100%;
   }
 }
+
+.calendar-container::before {
+  content: "";
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 14px;
+  height: 14px;
+  background: #444;
+  border-radius: 50%;
+  z-index: 5;
+}
+
+.calendar-container::after {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 0;
+  width: 100%;
+  height: 20px;
+
+  background: repeating-linear-gradient(
+    to right,
+    #333 0px,
+    #333 3px,
+    transparent 3px,
+    transparent 12px
+  );
+
+  z-index: 4;
+}
+
+.calendar-container {
+  position: relative;
+  padding-top: 10px;  /* space for spiral */
+}
+
+.calendar-container {
+  box-shadow: 
+    0 25px 50px rgba(0,0,0,0.2),
+    0 5px 10px rgba(0,0,0,0.1);
+}
+
+.calendar-container {
+  transform: rotate(-0.5deg);
+}
+
+@keyframes swing {
+  0%   { transform: rotate(0deg); }
+  25%  { transform: rotate(0.5deg); }
+  50%  { transform: rotate(0deg); }
+  75%  { transform: rotate(-0.5deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.calendar-container {
+  animation: swing 4s ease-in-out infinite;
+  transform-origin: top center;
+}
+
+.calendar-container {
+  transform-origin: top center;
+  transition: transform 0.3s ease;
+}
+
+.calendar-container:hover {
+  animation: swing 1s ease-in-out;
+}
+
+.calendar-container:hover {
+  animation: swing 1s ease-in-out;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+}
+
+.calendar-container::before {
+  content: "";
+  position: absolute;
+  top: -35px;
+  left: 50%;
+  transform: translateX(-50%);
+  
+  width: 12px;
+  height: 12px;
+  background: #444;
+  border-radius: 50%;
+
+  box-shadow: 
+    0 3px 6px rgba(0,0,0,0.4),
+    inset 0 -2px 3px rgba(255,255,255,0.4);
+
+  z-index: 6;
+}
+
+.calendar-container::after {
+  content: "";
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  
+  width: 2px;
+  height: 18px;
+  background: linear-gradient(
+    to bottom,
+    #777,
+    #444
+  );
+
+  box-shadow: 0 2px 3px rgba(0,0,0,0.3);
+
+  z-index: 5;
+}
+
+.spiral {
+  position: absolute;
+  top: -10px;
+  left: 0;
+  width: 100%;
+  height: 20px;
+
+  background: repeating-linear-gradient(
+    to right,
+    #333 0px,
+    #333 3px,
+    transparent 3px,
+    transparent 12px
+  );
+
+  z-index: 4;
+}
+
+.calendar-container {
+  transform-origin: top center;
+  transition: transform 0.2s ease;
+
+  box-shadow: 
+    0 30px 60px rgba(0,0,0,0.25),
+    0 10px 20px rgba(0,0,0,0.15);
+}
+
+.calendar-container {
+  position: relative;
+  transition: transform 0.1s ease;
+  transform-style: preserve-3d;
+}
+
+/* ✨ Reflection layer */
+.reflection {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: 16px;
+  z-index: 2;
+  mix-blend-mode: screen;
+}
+
+.calendar-container {
+  transition: transform 0.08s ease, box-shadow 0.08s ease;
+}
